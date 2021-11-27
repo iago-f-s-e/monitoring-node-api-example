@@ -5,19 +5,19 @@ import { IUserPost } from './contracts/user-post'
 @Controller('')
 export class UserPost implements IUserPost {
   @Post('')
-  public async create (request: Request, response: Response): Promise<Response> {
-    const { services } = request
+  public async create (request: Request): Promise<Response> {
+    const { services, responses } = request
 
     try {
       const userOrError = await services.user.add(request.body)
 
       if (userOrError.isLeft()) {
-        return response.status(400).json(userOrError.value)
+        return responses.conflict(userOrError.value)
       }
 
-      return response.status(201).json(userOrError.value)
+      return responses.created()
     } catch (error: any) {
-      return response.status(500).json(error.message)
+      return responses.serverError(error.message)
     }
   }
 }
