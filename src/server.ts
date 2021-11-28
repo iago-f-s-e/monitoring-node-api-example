@@ -1,6 +1,6 @@
-
 import 'dotenv/config'
 import 'reflect-metadata'
+import './infra/monitoring/config'
 
 import { Server as SetupServer } from '@overnightjs/core'
 import cors from 'cors'
