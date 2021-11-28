@@ -1,7 +1,7 @@
 import { Response } from 'express'
 
 import { ControllerError } from '@src/errors'
-import { conflictLogger } from '@src/infra/monitoring/log/helpers'
+// import { conflictLogger } from '@src/infra/monitoring/log/helpers'
 
 class ServerError extends Error implements ControllerError {
   constructor (reason: string) {
@@ -22,7 +22,7 @@ export class Responses {
   }
 
   public conflict (error: any): Response {
-    conflictLogger.error(error.message)
+    // conflictLogger.error(error.message)
     return this.response.status(409).json({ error: error.message })
   }
 
